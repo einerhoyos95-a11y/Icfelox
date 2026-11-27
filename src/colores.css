@@ -1,0 +1,42 @@
+/* src/index.css */
+
+:root {
+  /* === Colores principales === */
+  --fondo: #F5F5F5;
+  --tarjeta: #0D0B1F;
+  --input: #181534;
+  --acento: #39A900;          /* Verde principal (botones y títulos) */
+  --texto: #FFFFFF;
+  --texto-suave: #90A1B9;     /* Placeholders y textos secundarios */
+  --borde: #45556C;
+
+  /* === Colores extra === */
+  --texto-secundario: #62748E;
+  --gris-claro: #CAD5E2;
+  --gris: #D9D9D9;
+  --oscuro: #0D0B1F;
+  --oscuro-2: #181534;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+/* Utilidades rápidas */
+.texto-suave {
+  color: var(--texto-suave);
+}
+
+.texto-acento {
+  color: var(--acento);
+}
