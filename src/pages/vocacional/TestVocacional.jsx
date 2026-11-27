@@ -1,58 +1,11 @@
 import { useState } from "react";
+import { PREGUNTAS_VOCACIONALES } from "./vocacionalData";
+import { ResultadoVocacional } from "./ResultadoVocacional";
+import "./vocacional.css";
 
-const PREGUNTAS_VOCACIONALES = [
-    {
-        id: 1,
-        pregunta: "¿Qué actividad disfrutas más en tu tiempo libre?",
-        opciones: [
-        { texto: "Resolver acertijos lógicos, programar o analizar datos", area: "Ingeniería y Tecnología" },
-        { texto: "Leer, escribir ensayos, debatir o aprender idiomas", area: "Humanidades y Comunicación" },
-        { texto: "Realizar experimentos, investigar fenómenos naturales o cuidar la salud", area: "Ciencias de la Salud y Naturales" },
-        { texto: "Organizar proyectos, liderar grupos o emprender negocios", area: "Economía y Administración" },
-        ],
-    },
-    {
-        id: 2,
-        pregunta: "¿En cuál área del ICFES te sientes más cómodo?",
-        opciones: [
-        { texto: "Matemáticas", area: "Ingeniería y Tecnología" },
-        { texto: "Lectura Crítica e Inglés", area: "Humanidades y Comunicación" },
-        { texto: "Ciencias Naturales", area: "Ciencias de la Salud y Naturales" },
-        { texto: "Sociales y Ciudadanas", area: "Economía y Administración" },
-        ],
-    },
-    {
-        id: 3,
-        pregunta: "¿Cómo te imaginas tu entorno laboral ideal?",
-        opciones: [
-        { texto: "Diseñando software, máquinas o infraestructura", area: "Ingeniería y Tecnología" },
-        { texto: "En medios, educación, derecho o gestión cultural", area: "Humanidades y Comunicación" },
-        { texto: "En hospitales, laboratorios o conservación ambiental", area: "Ciencias de la Salud y Naturales" },
-        { texto: "En empresas, finanzas, mercadeo o consultoría", area: "Economía y Administración" },
-        ],
-    },
-    ];
+const LETRAS = ["A", "B", "C", "D"];
 
-    const CARRERAS_POR_AREA = {
-    "Ingeniería y Tecnología": {
-        carreras: ["Ingeniería de Sistemas", "Ingeniería Industrial", "Ciencia de Datos", "Ingeniería Civil"],
-        afinidadIcfes: "Matemáticas y Ciencias Naturales",
-    },
-    "Humanidades y Comunicación": {
-        carreras: ["Derecho", "Comunicación Social", "Licenciatura en Lenguas", "Psicología"],
-        afinidadIcfes: "Lectura Crítica, Sociales e Inglés",
-    },
-    "Ciencias de la Salud y Naturales": {
-        carreras: ["Medicina", "Enfermería", "Biología", "Química Farmacéutica"],
-        afinidadIcfes: "Ciencias Naturales y Matemáticas",
-    },
-    "Economía y Administración": {
-        carreras: ["Administración de Empresas", "Economía", "Contaduría Pública", "Negocios Internacionales"],
-        afinidadIcfes: "Matemáticas y Sociales y Ciudadanas",
-    },
-    };
-
-    export function TestVocacional() {
+export function TestVocacional() {
     const [pasoActual, setPasoActual] = useState(0);
     const [respuestas, setRespuestas] = useState({});
     const [finalizado, setFinalizado] = useState(false);
@@ -87,97 +40,63 @@ const PREGUNTAS_VOCACIONALES = [
     };
 
     if (finalizado) {
-        const areaGanadora = calcularAreaPrincipal();
-        const recomendacion = CARRERAS_POR_AREA[areaGanadora];
-
-        return (
-        <div style={{ maxWidth: "650px", margin: "0 auto", padding: "1.5rem" }}>
-            <h2>Resultado de tu Test Vocacional</h2>
-            <div style={{ padding: "1.5rem", border: "1px solid #cbd5e1", borderRadius: "8px", marginTop: "1rem" }}>
-            <p style={{ margin: 0, color: "#64748b" }}>Área profesional recomendada:</p>
-            <h3 style={{ margin: "0.5rem 0", color: "#0f172a" }}>{areaGanadora}</h3>
-            <p>
-                <strong>Áreas ICFES clave para potenciar:</strong> {recomendacion.afinidadIcfes}
-            </p>
-            <h4>Carreras universitarias afines:</h4>
-            <ul>
-                {recomendacion.carreras.map((carrera) => (
-                <li key={carrera}>{carrera}</li>
-                ))}
-            </ul>
-            <button
-                onClick={reiniciarTest}
-                style={{ marginTop: "1rem", padding: "0.6rem 1.2rem", cursor: "pointer" }}
-            >
-                Volver a presentar el test
-            </button>
-            </div>
-        </div>
-        );
+        return <ResultadoVocacional areaGanadora={calcularAreaPrincipal()} onReiniciar={reiniciarTest} />;
     }
 
     return (
-        <div style={{ maxWidth: "650px", margin: "0 auto", padding: "1.5rem" }}>
-        <h2>Test de Orientación Vocacional</h2>
-        <p>
-            Pregunta {pasoActual + 1} de {PREGUNTAS_VOCACIONALES.length} ({progreso}%)
+        <div className="vocacional-container">
+        <span className="vocacional-eyebrow">ORIENTACIÓN PROFESIONAL</span>
+        <h1 className="vocacional-title">Test Vocacional</h1>
+        <p className="vocacional-subtitle">
+            Descubre las carreras universitarias más afines a tus habilidades y resultados ICFES
         </p>
 
-        <div style={{ background: "#e2e8f0", height: "8px", borderRadius: "4px", marginBottom: "1.5rem" }}>
-            <div
-            style={{
-                width: `${progreso}%`,
-                background: "#2563eb",
-                height: "100%",
-                borderRadius: "4px",
-                transition: "width 0.3s",
-            }}
-            />
+        <div className="vocacional-progress-header">
+            <span>
+            Pregunta {pasoActual + 1} de {PREGUNTAS_VOCACIONALES.length}
+            </span>
+            <span style={{ color: "#4ade80", fontWeight: 700 }}>{progreso}% completado</span>
         </div>
 
-        <div style={{ padding: "1.5rem", border: "1px solid #cbd5e1", borderRadius: "8px" }}>
-            <h3>{pregunta.pregunta}</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "1rem" }}>
+        <div className="vocacional-progress-track">
+            <div className="vocacional-progress-fill" style={{ width: `${progreso}%` }} />
+        </div>
+
+        <div className="vocacional-card">
+            <h2 className="vocacional-question">{pregunta.pregunta}</h2>
+
+            <div className="vocacional-options">
             {pregunta.opciones.map((opcion, idx) => {
                 const seleccionada = respuestas[pregunta.id] === opcion.area;
                 return (
                 <button
                     key={idx}
+                    type="button"
                     onClick={() => seleccionarOpcion(opcion.area)}
-                    style={{
-                    textAlign: "left",
-                    padding: "0.85rem 1rem",
-                    borderRadius: "6px",
-                    border: seleccionada ? "2px solid #2563eb" : "1px solid #cbd5e1",
-                    background: seleccionada ? "#eff6ff" : "#ffffff",
-                    cursor: "pointer",
-                    }}
+                    className={`vocacional-option-btn ${seleccionada ? "selected" : ""}`}
                 >
-                    {opcion.texto}
+                    <span className="vocacional-option-badge">{LETRAS[idx]}</span>
+                    <span>{opcion.texto}</span>
                 </button>
                 );
             })}
             </div>
 
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1.5rem" }}>
+            <div className="vocacional-actions">
             <button
+                type="button"
                 disabled={pasoActual === 0}
                 onClick={() => setPasoActual(pasoActual - 1)}
-                style={{ padding: "0.6rem 1.2rem", cursor: pasoActual === 0 ? "not-allowed" : "pointer" }}
+                className="vocacional-btn-secondary"
             >
                 Anterior
             </button>
+
             <button
+                type="button"
                 disabled={!respuestas[pregunta.id]}
                 onClick={siguientePaso}
-                style={{
-                padding: "0.6rem 1.2rem",
-                background: respuestas[pregunta.id] ? "#2563eb" : "#94a3b8",
-                color: "#fff",
-                border: "none",
-                borderRadius: "6px",
-                cursor: respuestas[pregunta.id] ? "pointer" : "not-allowed",
-                }}
+                className="vocacional-btn-primary"
             >
                 {pasoActual === PREGUNTAS_VOCACIONALES.length - 1 ? "Ver Resultado" : "Siguiente"}
             </button>
