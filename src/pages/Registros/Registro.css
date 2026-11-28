@@ -1,0 +1,350 @@
+/* ==========================
+   CONTENEDOR EXTERNO DE REGISTRO
+========================== */
+.reg-page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: radial-gradient(circle at center, #0b1120 0%, #070913 100%);
+  color: #ffffff;
+  font-family: "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+.reg-page-wrapper,
+.reg-page-wrapper * {
+  box-sizing: border-box;
+}
+
+/* ==========================
+   CONTENEDOR PRINCIPAL
+========================== */
+.reg-container {
+  width: 100%;
+  max-width: 950px;
+  min-height: 550px;
+  background: rgba(11, 15, 31, 0.75);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  box-shadow:
+    0 0 40px rgba(57, 169, 0, 0.05),
+    0 20px 50px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.reg-view-panel {
+  display: flex;
+  min-height: 550px;
+}
+
+/* ==========================
+   PANEL IZQUIERDO (MARCA ICFELOX)
+========================== */
+.reg-brand-panel {
+  width: 45%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.reg-brand-panel::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #39a900;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.reg-logo-wrapper {
+  text-align: center;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+.reg-logo-wrapper h1 {
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #39a900;
+  text-shadow:
+    0 0 20px rgba(57, 169, 0, 0.6),
+    0 0 40px rgba(57, 169, 0, 0.4);
+}
+
+.reg-tagline {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  opacity: 0.9;
+}
+
+/* Alternativa visual temporal sin imágenes externas */
+.reg-visual-placeholder {
+  margin: 24px auto 0;
+  padding: 10px 14px;
+  max-width: 240px;
+  border-radius: 999px;
+  border: 1px dashed rgba(57, 169, 0, 0.4);
+  background: rgba(57, 169, 0, 0.07);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.reg-visual-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #39a900;
+  box-shadow: 0 0 8px #39a900;
+}
+
+/* ==========================
+   PANEL FORMULARIO
+========================== */
+.reg-form-panel {
+  width: 55%;
+  padding: 40px 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reg-form-panel h2 {
+  margin: 0 0 6px;
+  font-size: 1.75rem;
+  color: #39a900;
+}
+
+.reg-subtitle {
+  margin: 0 0 22px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* ==========================
+   SELECCIÓN DE ROL
+========================== */
+.reg-role-selection {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.reg-role-card {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.reg-role-card:hover {
+  border-color: rgba(57, 169, 0, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.reg-role-card input[type="radio"] {
+  display: none;
+}
+
+.reg-role-card.reg-role-selected {
+  border-color: #39a900;
+  background: rgba(11, 15, 31, 0.5);
+  box-shadow: 0 0 10px rgba(57, 169, 0, 0.15);
+}
+
+.reg-role-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: #ffffff;
+}
+
+.reg-role-desc {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+/* ==========================
+   CAMPOS DE FORMULARIO
+========================== */
+.reg-input-group {
+  margin-bottom: 16px;
+}
+
+.reg-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 7px;
+  color: #94a3b8;
+}
+
+.reg-input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.reg-input-group input::placeholder {
+  color: #334155;
+}
+
+.reg-input-group input:focus {
+  border-color: rgba(57, 169, 0, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.reg-input-group input.reg-input-error {
+  border-color: #ef4444;
+}
+
+.reg-password-info {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.reg-error-message {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #f87171;
+}
+
+.reg-status-message {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(57, 169, 0, 0.12);
+  border: 1px solid rgba(57, 169, 0, 0.45);
+  color: #86efac;
+  font-size: 0.85rem;
+}
+
+/* ==========================
+   CONTRASEÑA
+========================== */
+.reg-password-wrapper {
+  position: relative;
+}
+
+.reg-toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #39a900;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+/* ==========================
+   BOTÓN Y ENLACES
+========================== */
+.reg-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  background: #39a900;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.reg-btn-submit:hover {
+  background: #319200;
+  box-shadow: 0 4px 15px rgba(57, 169, 0, 0.3);
+}
+
+.reg-link-highlight {
+  color: #39a900;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.reg-link-highlight:hover {
+  opacity: 0.8;
+}
+
+.reg-form-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.reg-form-footer p {
+  margin: 0;
+}
+
+/* ==========================
+   RESPONSIVE (CELULARES Y TABLETS)
+========================== */
+@media (max-width: 900px) {
+  .reg-container {
+    max-width: 500px;
+    min-height: auto;
+    margin: 10px;
+  }
+
+  .reg-view-panel {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .reg-brand-panel,
+  .reg-form-panel {
+    width: 100%;
+  }
+
+  .reg-brand-panel {
+    padding: 36px 20px 16px;
+  }
+
+  .reg-form-panel {
+    padding: 28px 24px 32px;
+  }
+
+  .reg-logo-wrapper h1 {
+    font-size: 2.5rem;
+  }
+
+  .reg-role-selection {
+    flex-direction: column;
+  }
+}
